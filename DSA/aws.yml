@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: EC2 Instance Template
+
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-053b0d53c279acc90  # Replace with the desired Amazon Machine Image (AMI) ID
+      InstanceType: t2.micro  # Replace with the desired EC2 instance type
+      # KeyName: my-key-pair  # Replace with your existing EC2 key pair name
+      SecurityGroupIds:
+        - sg-08c672cdf772f85ce  # Replace with your existing security group ID
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          echo "Hello, World!" > /var/www/html/index.html  # Example user data script
+
+Outputs:
+  EC2InstancePublicIP:
+    Value: !GetAtt EC2Instance.PublicIp

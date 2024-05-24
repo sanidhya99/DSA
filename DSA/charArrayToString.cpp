@@ -1,0 +1,1 @@
+// string string_name(char_array_name);
